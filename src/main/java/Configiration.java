@@ -1,11 +1,14 @@
+import java.util.Arrays;
+
 public class Configiration {
 
     //variables
-    private String language;
-    private String filePath;
-    private String[] commands ;
-    private String projectName ;
-    private String output;
+    private String language;  //c,java etc
+    private String filePath;  // projenin yolu
+    private String[] commands ; //java için javac , c nin css gibi onların compiler ı
+    private String projectName ;  // projenin adı
+    private String output;  // projenin çıktısı
+    private String configName;
     //private String compilerPath;
 
 
@@ -57,14 +60,37 @@ public class Configiration {
         this.compilerPath = compilerPath;
     }*/
 
+
+    public void setConfigName(String configName) {
+        this.configName = configName;
+    }
+
+
+    public String getConfigName() {
+        return configName;
+    }
     //constructor
-    public Configiration(String language, String filePath, String[] commands, String projectName, String output) {
+
+
+    public Configiration(String language, String filePath, String[] commands, String projectName, String output, String configName) {
         this.language = language;
         this.filePath = filePath;
         this.commands = commands;
         this.projectName = projectName;
         this.output = output;
+        this.configName = configName;
     }
 
 
+    @Override
+    public String toString() {
+        return "Configiration{" +
+                "language='" + language + '\'' +
+                ", filePath='" + filePath + '\'' +
+                ", commands=" + Arrays.toString(commands) +
+                ", projectName='" + projectName + '\'' +
+                ", output='" + output + '\'' +
+                ", configName='" + configName + '\'' +
+                '}';
+    }
 }
