@@ -1,8 +1,11 @@
 public class Info {
     private String schoolId;
+    private String courseCode;
     private boolean isFailed;
-    public Info(String schoolId, boolean isFailed) {
-        this.schoolId=schoolId;
+
+    public Info(String schoolId, String courseCode, boolean isFailed) {
+        this.schoolId = schoolId;
+        this.courseCode = courseCode;
         this.isFailed = isFailed;
     }
 
@@ -14,9 +17,12 @@ public class Info {
         return schoolId;
     }
 
+    public String getCourseCode() {
+        return courseCode;
+    }
 
     @Override
     public String toString() {
-        return schoolId + ": " + isFailed;
+        return schoolId + " " + courseCode + ": " + isFailed;
     }
 }

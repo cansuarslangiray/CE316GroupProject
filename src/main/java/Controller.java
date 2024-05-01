@@ -18,31 +18,44 @@ public class Controller {
     }
 
     @FXML // arayüzdeki createConfigiration butonu ile aktifleşecek
-    public void createConfig(){
-        Gson gson = new Gson();
+    public void createConfig(Info info) {
+    Gson gson = new Gson();
 
-        //ceren guiyi yaptıktan sonra bu kısım aktifleşecek id isimlendirmesinden sonra
-        String language=languageid.getText(); //text fieldden veri gelecek id sine göre
-        String fPath=filePathid.getText(); //text fieldden veri gelecek id sine göre
-        String[] commands =commandsid.getText(); //text fieldden veri gelecek id sine göre
-        String projectName= projectNameid.getText(); //text fieldden veri gelecek id sine göre
-        String output=outputid.getText(); //text fieldden veri gelecek id sine göre
-        String configName=configNameid.getText();
+    String language = languageid.getText();
+    String fPath = filePathid.getText();
+    String[] commands = commandsid.getText();
+    String projectName = projectNameid.getText();
+    String output = outputid.getText();
+    String configName = configNameid.getText();
 
-        Configiration config=new Configiration(language,fPath,commands,projectName,output,configName);
+    Configuration config = new Configuration(language, fPath, commands, projectName, output, configName);
 
-        String newJson = gson.toJson(config);
+    String newJson = gson.toJson(config);
 
-        //Create new directory according to course code
-        String newFileName=configName+".json";
-        File file = new File(directory,newFileName);  // directory nimet tarafından yapılacak, file pathte aynı şekkilde
-        try (FileWriter fileWriter = new FileWriter(file)) {
-            fileWriter.write(newJson);
-            System.out.println("JSON written to file successfully.");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+
+    String defaultDirectoryPath = FileSystemView.getFileSystemView().getDefaultDirectory().getPath();
+    String quizzesPath = defaultDirectoryPath + File.separator + "Quizzes";
+    File quizzesDirectory = new File(quizzesPath);
+    if (!quizzesDirectory.exists()) {
+        quizzesDirectory.mkdirs();
     }
+
+    String studentCodePath = quizzesPath + File.separator + info.getCourseCode() + File.separator + info.getSchoolId();
+    File studentDirectory = new File(studentCodePath);
+    if (!studentDirectory.exists()) {
+        studentDirectory.mkdirs();
+    }
+
+    String filePath = studentCodePath + File.separator + configName + ".json";
+    File file = new File(filePath);
+
+    try (FileWriter fileWriter = new FileWriter(file)) {
+        fileWriter.write(newJson);
+        System.out.println("JSON written to file successfully.");
+    } catch (IOException e) {
+        throw new RuntimeException(e);
+    }
+}
 
     @FXML  //edit configiration sahnesi açıldıktan sonra edit butonu ile aktifleşecek
     public void openConfig(String filePath){  // also edit can do from there
