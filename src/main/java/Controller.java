@@ -5,7 +5,7 @@ import java.io.*;
 
 public class Controller {
 
-    private static Configiration readJsonFile(String filePath) {
+   /* private static Configiration readJsonFile(String filePath) {
         try (FileReader fileReader = new FileReader(filePath)) {
             return new Gson().fromJson(fileReader, Configiration.class);
         } catch (FileNotFoundException e) {
@@ -71,5 +71,5 @@ public class Controller {
     }
 
     String filePath;
-
+*/
 }
