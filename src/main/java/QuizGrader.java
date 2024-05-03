@@ -17,14 +17,14 @@ public class QuizGrader {
         List<File> answer = unzip(teacherCodePath, teachDirectory);
         for (File anw : answer) {
 
-            String teacherOutputRaw = Compiler.compileAndRun("gcc", anw.getPath(), "hello");
+            String teacherOutputRaw = Compiler.compileAndRunCPlus("g++", anw.getPath(), "my_prgrm");
             a = teacherOutputRaw;
 
         }
         String expectedOutput = normalizeOutput(a);
 
         for (File submission : submissions) {
-            String studentOutputRaw = Compiler.compileAndRun("gcc", submission.getPath(), "hello");
+            String studentOutputRaw = Compiler.compileAndRunCPlus("g++", submission.getPath(), "my_prgrm");
             String output = normalizeOutput(studentOutputRaw);
             int score = calculateScore(output, expectedOutput);
             results.add(submission.getName() + ": " + score + "/100");
