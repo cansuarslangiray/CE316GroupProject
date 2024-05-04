@@ -16,22 +16,43 @@ public class QuizGrader {
         List<String> results = new ArrayList<>();
         List<File> answer = unzip(teacherCodePath, teachDirectory);
         for (File anw : answer) {
-
-            String teacherOutputRaw = Compiler.compileAndRunCPlus("g++", anw.getPath(), "my_prgrm");
+            String teacherOutputRaw;
+            if (anw.getName().endsWith(".java")) {
+                teacherOutputRaw = Compiler.compileAndRunJava("javac", anw.getPath(), "my_prgrm2");
+            } else if (anw.getName().endsWith(".cpp")) {
+                teacherOutputRaw = Compiler.compileAndRunCPlus("g++", anw.getPath(), "my_prgrm");
+            } else if (anw.getName().endsWith(".c")) {
+                teacherOutputRaw = Compiler.compileAndRun("gcc", anw.getPath(), "hello");
+            } else {
+                throw new IllegalArgumentException("Unsupported file type: " + anw.getName());
+            }
             a = teacherOutputRaw;
-
         }
+
         String expectedOutput = normalizeOutput(a);
 
         for (File submission : submissions) {
-            String studentOutputRaw = Compiler.compileAndRunCPlus("g++", submission.getPath(), "my_prgrm");
-            String output = normalizeOutput(studentOutputRaw);
+            String studentOutputRaw;
+            String output;
+            if (submission.getName().endsWith(".java")) {
+                studentOutputRaw = Compiler.compileAndRunJava("javac", submission.getPath(), "my_prgrm2");
+                output = normalizeOutput(studentOutputRaw);
+            } else if (submission.getName().endsWith(".cpp")) {
+                studentOutputRaw = Compiler.compileAndRunCPlus("g++", submission.getPath(), "my_prgrm");
+                output = normalizeOutput(studentOutputRaw);
+            } else if (submission.getName().endsWith(".c")) {
+                studentOutputRaw = Compiler.compileAndRun("gcc", submission.getPath(), "hello");
+                output = normalizeOutput(studentOutputRaw);
+            } else {
+                throw new IllegalArgumentException("Unsupported file type: " + submission.getName());
+            }
             int score = calculateScore(output, expectedOutput);
             results.add(submission.getName() + ": " + score + "/100");
             logOutputComparison(submission.getName(), output, expectedOutput, score);
         }
         return results;
     }
+
 
     public static int calculateScore(String actualOutput, String expectedOutput) {
         LevenshteinDistance levDist = new LevenshteinDistance();
