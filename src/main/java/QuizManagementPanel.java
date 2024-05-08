@@ -1,8 +1,7 @@
-import javafx.application.Platform;
+/*import javafx.application.Platform;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
-
 import java.io.File;
 import java.util.List;
 
@@ -16,6 +15,13 @@ public class QuizManagementPanel extends VBox {
         Button uploadSubmissionsButton = new Button("Upload Student Submissions");
 
         configureFileChooser(fileChooser);
+
+        // Styling for buttons
+        uploadQuizAnswerButton.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10px;");
+        uploadSubmissionsButton.setStyle("-fx-background-color: #008CBA; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10px;");
+
+        // Styling for results display
+        resultsDisplay.setStyle("-fx-font-family: 'Arial'; -fx-font-size: 14px;");
 
         uploadQuizAnswerButton.setOnAction(e -> {
             File quizAnswerFile = fileChooser.showOpenDialog(null);
@@ -35,6 +41,9 @@ public class QuizManagementPanel extends VBox {
             }
         });
 
+        // Set colorful background for the VBox
+        this.setStyle("-fx-background-color: linear-gradient(to bottom right, #ff9999, #66ccff); -fx-padding: 20px;");
+
         this.getChildren().addAll(uploadQuizAnswerButton, uploadSubmissionsButton, resultsDisplay);
     }
 
@@ -49,6 +58,7 @@ public class QuizManagementPanel extends VBox {
         });
         gradingThread.start();
     }
+
     private void configureFileChooser(FileChooser fileChooser) {
         fileChooser.setTitle("Open Resource File");
         fileChooser.getExtensionFilters().addAll(
@@ -56,6 +66,7 @@ public class QuizManagementPanel extends VBox {
                 new FileChooser.ExtensionFilter("All Files", "*.*")
         );
     }
-
-
 }
+
+*/
+
