@@ -1,3 +1,5 @@
+package com.example.CE316GroupProjet;
+
 import java.util.Arrays;
 
 public class Configiration {

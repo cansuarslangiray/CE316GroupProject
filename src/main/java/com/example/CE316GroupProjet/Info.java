@@ -1,3 +1,5 @@
+package com.example.CE316GroupProjet;
+
 public class Info {
     private String schoolId;
     private String courseCode;

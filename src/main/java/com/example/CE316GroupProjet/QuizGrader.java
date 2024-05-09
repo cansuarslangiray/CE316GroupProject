@@ -1,5 +1,6 @@
+package com.example.CE316GroupProjet;
+
 import java.io.*;
-import java.nio.file.*;
 import java.util.*;
 import java.util.zip.*;
 

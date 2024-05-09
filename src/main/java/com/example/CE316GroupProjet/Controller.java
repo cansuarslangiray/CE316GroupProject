@@ -1,7 +1,4 @@
-import com.google.gson.Gson;
-import javafx.fxml.FXML;
-
-import java.io.*;
+package com.example.CE316GroupProjet;
 
 public class Controller {
 
